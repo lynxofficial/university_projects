@@ -2,8 +2,6 @@ package bank;
 
 import java.util.ArrayList;
 
-import bank.*;
-
 public class Test {
     public static void main(String[] args) {
         AccountNumberGenerator accountNumberGenerator = new AccountNumberGenerator();
@@ -24,24 +22,24 @@ public class Test {
         NaturalClient naturalClient1 = new NaturalClient("firstName2", "lastName2", "4321", new ArrayList<Account>());
         System.out.println(account.getUnique_number());
         account.setUnique_number(345);
-        System.out.println(account3.getRemainder());
+        System.out.println(account3.getBalance());
         System.out.println(account3.getCommission());
         account.setCommission(12345);
         System.out.println(account3.getCurrency());
         account.setCurrency(Currency.EUR);
-        account1.reduceCommissionFromRemainder();
+        account1.reduceCommissionFromBalance();
         account1.writeOffSum(1000);
         account1.replenishmentAccount(12345);
         System.out.println(accountNumberGenerator.getCurrent());
         System.out.println(accountNumberGenerator.getNext());
         accountNumberGenerator.reset();
-        System.out.println(creditAccount4.getProcent());
-        creditAccount.setProcent(10);
+        System.out.println(creditAccount4.getPercent());
+        creditAccount.setPercent(10);
         System.out.println(creditAccount4.getLimit());
-        System.out.println(creditAccount4.getAssessed_procents());
+        System.out.println(creditAccount4.getAssessed_percents());
         System.out.println(creditAccount4.getAssessed_commissions());
-        creditAccount4.increaseProcent(2015);
-        creditAccount4.reduceCommissionFromRemainder();
+        creditAccount4.increasePercent(2015);
+        creditAccount4.reduceCommissionFromBalance();
         creditAccount4.replenishmentAccount(1000);
         System.out.println(creditAccount4.equals(creditAccount3));
         System.out.println(creditAccount4.hashCode());
@@ -51,8 +49,8 @@ public class Test {
         naturalClient.addAccount(account1);
         System.out.println(naturalClient.getAccount(1));
         System.out.println(naturalClient.getAccounts());
-        System.out.println(naturalClient.ammountRemainder());
-        System.out.println(naturalClient.getAccountsPositive());
+        System.out.println(naturalClient.amountBalance());
+        System.out.println(naturalClient.getPlusAccounts());
         naturalClient.deleteAccount(1);
         naturalClient.addAccount(account1);
         naturalClient.addCreditAccount(creditAccount);
@@ -61,7 +59,16 @@ public class Test {
         naturalClient.increaseBalance(1, 1000);
         System.out.println(naturalClient.getDebitAccounts());
         System.out.println(naturalClient.getCreditAccounts());
-        System.out.println(naturalClient.ammountDebitAccounts());
-        System.out.println(naturalClient.ammountOfDebt());
+        System.out.println(naturalClient.amountDebitAccounts());
+        System.out.println(naturalClient.amountOfDebt());
+        double sum = 100;
+        try {
+            creditAccount4.writeOffSum(sum);
+            if (sum > creditAccount4.getBalance()) {
+                throw new InsufficientFundsException("Exception: The entered number is greater than the allowed");
+            }
+        } catch (InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

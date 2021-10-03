@@ -1,63 +1,87 @@
 package bank;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NaturalClient implements Client {
-    public String firstName, lastName, passport;
-    public ArrayList<Account> accounts = new ArrayList<Account>();
-    public ArrayList<DebitAccount> debitAccounts = new ArrayList<DebitAccount>();
-    public ArrayList<CreditAccount> creditAccounts = new ArrayList<CreditAccount>();
+    private String firstName;
+    private String lastName;
+    private String passport;
+    private List<Account> accounts = new ArrayList<>();
+    private List<DebitAccount> debitAccounts = new ArrayList<>();
+    private List<CreditAccount> creditAccounts = new ArrayList<>();
 
     public NaturalClient(String firstName, String lastName, String passport) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.passport = passport;
-        accounts = new ArrayList<Account>();
+        this(firstName, lastName, passport, new ArrayList<>());
     }
 
-    public NaturalClient(String firstName, String lastName, String passport, ArrayList<Account> accounts) {
+    public NaturalClient(String firstName, String lastName, String passport, List<Account> accounts) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passport = passport;
         this.accounts = accounts;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
+
     public Account getAccount(long uniq) {
         for (Account account : accounts) {
-            if (account.unique_number == uniq) {
+            if (account.getUnique_number() == uniq) {
                 return account;
             }
         }
         return new Account(uniq);
     }
 
-    public ArrayList<Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
-    public long ammountRemainder() {
+    public long amountBalance() {
         long sum = 0;
         for (Account account : accounts) {
-            if (account.remainder > 0) {
-                sum += account.remainder;
+            if (account.getBalance() > 0) {
+                sum += account.getBalance();
             }
         }
         return sum;
     }
 
-    public ArrayList<Account> getAccountsPositive() {
-        ArrayList<Account> accounts_new = new ArrayList<>();
+    public List<Account> getPlusAccounts() {
+        List<Account> plusAccounts = new ArrayList<>();
         for (Account account : accounts) {
-            if (account.remainder >= 0) {
-                accounts_new.add(account);
+            if (account.getBalance() >= 0) {
+                plusAccounts.add(account);
             }
         }
-        return accounts_new;
+        return plusAccounts;
     }
 
     public void deleteAccount(long uniq) {
         for (Account account : accounts) {
-            if (account.unique_number == uniq) {
+            if (account.getUnique_number() == uniq) {
                 accounts.remove(account);
                 break;
             }
@@ -79,8 +103,8 @@ public class NaturalClient implements Client {
 
     public void reduceBalance(long uniq, double red) {
         for (Account account : accounts) {
-            if (account.unique_number == uniq) {
-                account.remainder -= red;
+            if (account.getUnique_number() == uniq) {
+                account.decreaseBalance(red);
                 break;
             }
         }
@@ -88,36 +112,36 @@ public class NaturalClient implements Client {
 
     public void increaseBalance(long uniq, double inc) {
         for (Account account : accounts) {
-            if (account.unique_number == uniq) {
-                account.remainder += inc;
+            if (account.getUnique_number() == uniq) {
+                account.replenishmentAccount(inc);
                 break;
             }
         }
     }
 
-    public ArrayList<DebitAccount> getDebitAccounts() {
+    public List<DebitAccount> getDebitAccounts() {
         return debitAccounts;
     }
 
-    public ArrayList<CreditAccount> getCreditAccounts() {
+    public List<CreditAccount> getCreditAccounts() {
         return creditAccounts;
     }
 
-    public double ammountDebitAccounts() {
+    public double amountDebitAccounts() {
         double sum = 0;
         for (DebitAccount debitAccount : debitAccounts) {
-            sum += debitAccount.remainder;
+            sum += debitAccount.getBalance();
         }
         return sum;
     }
 
-    public double ammountOfDebt() {
+    public double amountOfDebt() {
         double sum = 0;
         for (CreditAccount creditAccount : creditAccounts) {
             sum += creditAccount.getAssessed_commissions();
-            sum += creditAccount.getAssessed_procents();
-            if (creditAccount.remainder < 0) {
-                sum += creditAccount.remainder;
+            sum += creditAccount.getAssessed_percents();
+            if (creditAccount.getBalance() < 0) {
+                sum += creditAccount.getBalance();
             }
         }
         return sum;

@@ -1,13 +1,13 @@
 package bank;
 
 public class AccountNumberGenerator {
-    private static int stat = 0;
+    private static long stat = 0;
 
-    public static int getNext() {
+    public static long getNext() {
         return ++stat;
-    }
+    } // увеличение id счета
 
-    public static int getCurrent() {
+    public static long getCurrent() {
         return stat;
     }
 

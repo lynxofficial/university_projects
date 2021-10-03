@@ -1,21 +1,21 @@
 package bank;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Client {
     Account getAccount(long uniq);
 
-    ArrayList<Account> getAccounts();
+    List<Account> getAccounts();
 
-    ArrayList<DebitAccount> getDebitAccounts();
+    List<DebitAccount> getDebitAccounts();
 
-    ArrayList<CreditAccount> getCreditAccounts();
+    List<CreditAccount> getCreditAccounts();
 
-    double ammountDebitAccounts();
+    double amountDebitAccounts();
 
-    double ammountOfDebt();
+    double amountOfDebt();
 
-    ArrayList<Account> getAccountsPositive();
+    List<Account> getPlusAccounts();
 
     void deleteAccount(long uniq);
 
