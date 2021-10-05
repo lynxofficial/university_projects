@@ -54,7 +54,7 @@ public class CreditAccount extends Account {
     }
 
     public void increasePercent(int year) {
-        LocalDate localDate = LocalDate.of(2020, 12, 31);
+        LocalDate localDate = LocalDate.of(year, 12, 31);
         if (getBalance() < limit) {
             assessed_percents = (limit - getBalance()) * (percent / localDate.getDayOfYear()) / 100;
         }
