@@ -5,6 +5,10 @@ class Account {
     private double balance = 0;
     private double commission;
     private Currency currency;
+    private final Currency[] currencies = {Currency.USD, Currency.EUR, Currency.JOY, Currency.TRY, Currency.AED, Currency.RUB};
+    private final double[][] currenciesCoefficients = {{1, 1.1, 0.009, 0.1, 0.2, 0.1}, {0.8, 1, 0.007, 0.09, 0.23, 0.01},
+            {109.9, 128.9, 1, 12.5, 29.9, 1.5}, {8.7, 10.2, 0.07, 1, 2.3, 0.1},
+            {3.6, 4.3, 0.03, 0.4, 1, 0.05}, {72.6, 85.2, 0.6, 8.3, 19.8, 1}};
 
 
     public Account(long unique_number) {
@@ -58,139 +62,36 @@ class Account {
         return currency;
     }
 
+    public int getIdCurrency(Currency currency) {
+        int id = 0;
+        for (int i = 0; i < currencies.length; i++) {
+            if (currency == currencies[i]) {
+                id = i;
+                break;
+            }
+        }
+        return id;
+    }
+
     public void setCurrency(Currency currency) {
-        if (this.currency == Currency.RUB) {
-            if (currency == Currency.AED) {
-                this.currency = currency;
-                commission *= 0.05;
-                balance *= 0.05;
-            } else if (currency == Currency.EUR) {
-                this.currency = currency;
-                commission *= 0.01;
-                balance *= 0.01;
-            } else if (currency == Currency.JOY) {
-                this.currency = currency;
-                commission *= 1.5;
-                balance *= 1.5;
-            } else if (currency == Currency.TRY) {
-                this.currency = currency;
-                commission *= 0.1;
-                balance *= 0.1;
-            } else if (currency == Currency.USD) {
-                this.currency = currency;
-                commission *= 0.1;
-                balance *= 0.1;
+        int indexThisCurrency = getIdCurrency(this.currency);
+        int indexNewCurrency = getIdCurrency(currency);
+        this.currency = currency;
+        commission *= currenciesCoefficients[indexNewCurrency][indexThisCurrency];
+        balance *= currenciesCoefficients[indexNewCurrency][indexThisCurrency];
+    }
+
+    public void printCurrencyCoefficients() {
+        for (int i = 0; i < currencies.length; i++) {
+            System.out.print(String.format("%9s", currencies[i]));
+        }
+        System.out.println();
+        for (int i = 0; i < currencies.length; i++) {
+            System.out.print(currencies[i]);
+            for (int j = 0; j < currencies.length; j++) {
+                System.out.printf(" %7.2f", currenciesCoefficients[i][j]);
             }
-        } else if (this.currency == Currency.AED) {
-            if (currency == Currency.RUB) {
-                this.currency = currency;
-                commission *= 19.8;
-                balance *= 19.8;
-            } else if (currency == Currency.EUR) {
-                this.currency = currency;
-                commission *= 0.23;
-                balance *= 0.23;
-            } else if (currency == Currency.JOY) {
-                this.currency = currency;
-                commission *= 29.9;
-                balance *= 29.9;
-            } else if (currency == Currency.TRY) {
-                this.currency = currency;
-                commission *= 2.3;
-                balance *= 2.3;
-            } else if (currency == Currency.USD) {
-                this.currency = currency;
-                commission *= 0.2;
-                balance *= 0.2;
-            }
-        } else if (this.currency == Currency.EUR) {
-            if (currency == Currency.RUB) {
-                this.currency = currency;
-                commission *= 85.2;
-                balance *= 85.2;
-            } else if (currency == Currency.AED) {
-                this.currency = currency;
-                commission *= 4.3;
-                balance *= 4.3;
-            } else if (currency == Currency.JOY) {
-                this.currency = currency;
-                commission *= 128.9;
-                balance *= 128.9;
-            } else if (currency == Currency.TRY) {
-                this.currency = currency;
-                commission *= 10.2;
-                balance *= 10.2;
-            } else if (currency == Currency.USD) {
-                this.currency = currency;
-                commission *= 1.1;
-                balance *= 1.1;
-            }
-        } else if (this.currency == Currency.JOY) {
-            if (currency == Currency.RUB) {
-                this.currency = currency;
-                commission *= 0.6;
-                balance *= 0.6;
-            } else if (currency == Currency.AED) {
-                this.currency = currency;
-                commission *= 0.03;
-                balance *= 0.03;
-            } else if (currency == Currency.EUR) {
-                this.currency = currency;
-                commission *= 0.007;
-                balance *= 0.007;
-            } else if (currency == Currency.TRY) {
-                this.currency = currency;
-                commission *= 0.07;
-                balance *= 0.07;
-            } else if (currency == Currency.USD) {
-                this.currency = currency;
-                commission *= 0.009;
-                balance *= 0.009;
-            }
-        } else if (this.currency == Currency.TRY) {
-            if (currency == Currency.RUB) {
-                this.currency = currency;
-                commission *= 8.3;
-                balance *= 8.3;
-            } else if (currency == Currency.AED) {
-                this.currency = currency;
-                commission *= 0.4;
-                balance *= 0.4;
-            } else if (currency == Currency.EUR) {
-                this.currency = currency;
-                commission *= 0.09;
-                balance *= 0.09;
-            } else if (currency == Currency.JOY) {
-                this.currency = currency;
-                commission *= 12.5;
-                balance *= 12.5;
-            } else if (currency == Currency.USD) {
-                this.currency = currency;
-                commission *= 0.1;
-                balance *= 0.1;
-            }
-        } else if (this.currency == Currency.USD) {
-            if (currency == Currency.RUB) {
-                this.currency = currency;
-                commission *= 72.7;
-                balance *= 72.7;
-            } else if (currency == Currency.AED) {
-                this.currency = currency;
-                commission *= 3.6;
-                balance *= 3.6;
-            } else if (currency == Currency.EUR) {
-                this.currency = currency;
-                commission *= 0.8;
-                balance *= 0.8;
-            } else if (currency == Currency.JOY) {
-                this.currency = currency;
-                commission *= 109.9;
-                balance *= 109.9;
-            } else if (currency == Currency.TRY) {
-                this.currency = currency;
-                commission *= 8.7;
-                balance *= 8.7;
-            }
+            System.out.println();
         }
     }
 
