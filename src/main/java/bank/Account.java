@@ -1,9 +1,9 @@
 package bank;
 
 class Account {
-    private static final int DEFAULT_BALANCE = 0;
-    private static final int DEFAULT_COMMISSION = 0;
-    private static final Currency DEFAULT_CURRENCY = Currency.RUB;
+    public static final int DEFAULT_BALANCE = 0;
+    public static final int DEFAULT_COMMISSION = 0;
+    public static final Currency DEFAULT_CURRENCY = Currency.RUB;
     private long unique_number;
     private double balance = 0;
     private double commission;
