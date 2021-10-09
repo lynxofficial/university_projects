@@ -16,7 +16,7 @@ public class CreditAccount extends Account {
     }
 
     public CreditAccount(long unique_number, double balance, double commission) {
-        super(unique_number, balance, commission, Currency.RUB);
+        super(unique_number, balance, commission, DEFAULT_CURRENCY);
     }
 
     public CreditAccount(long unique_number, double balance, double commission, Currency currency) {
