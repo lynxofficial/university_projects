@@ -63,12 +63,12 @@ public class Test {
         System.out.println(naturalClient.amountOfDebt());
         double sum = 100;
         try {
-            creditAccount4.writeOffSum(sum);
             if (sum > creditAccount4.getBalance()) {
                 throw new InsufficientFundsException("Exception: The entered number is greater than the allowed");
             }
         } catch (InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
+        creditAccount4.writeOffSum(sum);
     }
 }
