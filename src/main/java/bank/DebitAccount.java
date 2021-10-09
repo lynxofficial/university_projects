@@ -12,7 +12,7 @@ public class DebitAccount extends Account {
     }
 
     public DebitAccount(long unique_number, double balance, double commission) {
-        super(unique_number, balance, commission, Currency.RUB);
+        super(unique_number, balance, commission);
     }
 
     public DebitAccount(long unique_number, double balance, double commission, Currency currency) {
