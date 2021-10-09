@@ -1,6 +1,8 @@
 package bank;
 
 class Account {
+    private static final int DEFAULT_BALANCE = 0;
+    private static final int DEFAULT_COMMISSION = 0;
     private long unique_number;
     private double balance = 0;
     private double commission;
@@ -12,11 +14,11 @@ class Account {
 
 
     public Account(long unique_number) {
-        this(unique_number, 0, 0, Currency.RUB);
+        this(unique_number, DEFAULT_BALANCE, DEFAULT_COMMISSION, Currency.RUB);
     }
 
     public Account(long unique_number, double balance) {
-        this(unique_number, balance, 0, Currency.RUB);
+        this(unique_number, balance, DEFAULT_COMMISSION, Currency.RUB);
     }
 
     public Account(long unique_number, double balance, double commission) {
