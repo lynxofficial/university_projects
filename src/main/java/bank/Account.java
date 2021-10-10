@@ -4,7 +4,7 @@ class Account {
     public static final int DEFAULT_BALANCE = 0;
     public static final int DEFAULT_COMMISSION = 0;
     public static final Currency DEFAULT_CURRENCY = Currency.RUB;
-    private long unique_number;
+    private long uniqueNumber;
     private double balance = 0;
     private double commission;
     private Currency currency;
@@ -14,31 +14,31 @@ class Account {
             {3.6, 4.3, 0.03, 0.4, 1, 0.05}, {72.6, 85.2, 0.6, 8.3, 19.8, 1}};
 
 
-    public Account(long unique_number) {
-        this(unique_number, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
+    public Account(long uniqueNumber) {
+        this(uniqueNumber, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
     }
 
-    public Account(long unique_number, double balance) {
-        this(unique_number, balance, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
+    public Account(long uniqueNumber, double balance) {
+        this(uniqueNumber, balance, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
     }
 
-    public Account(long unique_number, double balance, double commission) {
-        this(unique_number, balance, commission, DEFAULT_CURRENCY);
+    public Account(long uniqueNumber, double balance, double commission) {
+        this(uniqueNumber, balance, commission, DEFAULT_CURRENCY);
     }
 
-    public Account(long unique_number, double balance, double commission, Currency currency) {
-        this.unique_number = unique_number;
+    public Account(long uniqueNumber, double balance, double commission, Currency currency) {
+        this.uniqueNumber = uniqueNumber;
         this.balance = balance;
         this.commission = commission;
         this.currency = currency;
     }
 
-    public long getUnique_number() {
-        return unique_number;
+    public long getUniqueNumber() {
+        return uniqueNumber;
     }
 
-    public void setUnique_number(long Unique_number) {
-        unique_number = Unique_number;
+    public void setUniqueNumber(long uniqueNumber) {
+        this.uniqueNumber = uniqueNumber;
     }
 
     public double getBalance() {
