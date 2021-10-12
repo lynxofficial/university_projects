@@ -1,34 +1,35 @@
 package bank;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Objects;
 
 public class CreditAccount extends Account {
-    private double percent = 0;
-    private double assessedPercents = 0;
-    private double assessedCommissions = 0;
-    private long limit = 0;
+    private double percent;
+    private long cardLimit;
+    private double plusPercents;
+    private double plusCommissions;
 
-    public CreditAccount(long uniqueNumber) {
-        super(uniqueNumber);
+    public CreditAccount(long id) {
+        super(id);
     }
 
-    public CreditAccount(long uniqueNumber, double balance) {
-        super(uniqueNumber, balance);
+    public CreditAccount(long id, double balance) {
+        super(id, balance);
     }
 
-    public CreditAccount(long uniqueNumber, double balance, double commission) {
-        super(uniqueNumber, balance, commission, DEFAULT_CURRENCY);
+    public CreditAccount(long id, double balance, double commission) {
+        super(id, balance, commission, DEFAULT_CURRENCY);
     }
 
-    public CreditAccount(long uniqueNumber, double balance, double commission, Currency currency) {
-        super(uniqueNumber, balance, commission, currency);
+    public CreditAccount(long id, double balance, double commission, Currency currency) {
+        super(id, balance, commission, currency);
     }
 
-    public CreditAccount(long uniqueNumber, double balance, double commission, Currency currency, double percent, long limit) {
-        super(uniqueNumber, balance, commission, currency);
+    public CreditAccount(long id, double balance, double commission, Currency currency, double percent, long cardLimit) {
+        super(id, balance, commission, currency);
         this.percent = percent;
-        this.limit = limit;
+        this.cardLimit = cardLimit;
     }
 
     public double getPercent() {
@@ -39,40 +40,39 @@ public class CreditAccount extends Account {
         this.percent = percent;
     }
 
-    public long getLimit() {
-        return limit;
+    public long getCardLimit() {
+        return cardLimit;
     }
 
-    public void setLimit(long limit) {
-        this.limit = limit;
+    public void setCardLimit(long cardLimit) {
+        this.cardLimit = cardLimit;
     }
 
-    public double getAssessedPercents() {
-        return assessedPercents;
+    public double getPlusPercents() {
+        return plusPercents;
     }
 
-    public double getAssessedCommissions() {
-        return assessedCommissions;
+    public double getPlusCommissions() {
+        return plusCommissions;
     }
 
     public void increasePercent(int year) {
-        LocalDate localDate = LocalDate.of(year, 12, 31);
-        if (getBalance() < limit) {
-            assessedPercents = (limit - getBalance()) * (percent / localDate.getDayOfYear()) / 100;
+        LocalDate localDate = LocalDate.of(year, Month.DECEMBER.getValue(), Month.JANUARY.maxLength());
+        if (getBalance() < cardLimit) {
+            plusPercents = (cardLimit - getBalance()) * (percent / localDate.getDayOfYear()) / 100;
         }
     }
 
     @Override
-    public void reduceCommissionFromBalance() {
-        double cmn = getCommission();
-        cmn += assessedCommissions;
-        setCommission(cmn);
+    public void subtractCommissionFromBalance() {
+        plusCommissions += getCommission();
+        setCommission(getCommission() + plusCommissions);
     }
 
     @Override
-    public void replenishmentAccount(double sum) {
-        decreaseBalance(assessedCommissions + assessedPercents);
-        super.replenishmentAccount(sum);
+    public void refillAccount(double sum) {
+        subtractBalance(plusCommissions + plusPercents);
+        super.refillAccount(sum);
     }
 
     @Override
@@ -82,16 +82,16 @@ public class CreditAccount extends Account {
         if (object == null || getClass() != object.getClass())
             return false;
         CreditAccount that = (CreditAccount) object;
-        return Double.compare(that.percent, percent) == 0 && Double.compare(that.assessedPercents, assessedPercents) == 0 && Double.compare(that.assessedCommissions, assessedCommissions) == 0 && limit == that.limit;
+        return Double.compare(that.percent, percent) == 0 && Double.compare(that.plusPercents, plusPercents) == 0 && Double.compare(that.plusCommissions, plusCommissions) == 0 && cardLimit == that.cardLimit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(percent, assessedPercents, assessedCommissions, limit);
+        return Objects.hash(percent, plusPercents, plusCommissions, cardLimit);
     }
 
     @Override
     public String toString() {
-        return "percent: " + percent + "\n" + "assessed_percents: " + assessedPercents + "\n" + "assessed_commissions: " + assessedCommissions + "\n" + "limit: " + limit + "\n";
+        return "percent: " + percent + "\n" + "assessed_percents: " + plusPercents + "\n" + "assessed_commissions: " + plusCommissions + "\n" + "limit: " + cardLimit + "\n";
     }
 }
