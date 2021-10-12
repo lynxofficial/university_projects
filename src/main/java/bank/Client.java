@@ -3,6 +3,7 @@ package bank;
 import java.util.List;
 
 public interface Client {
+
     Account getAccount(long uniq);
 
     List<Account> getAccounts();
@@ -11,11 +12,11 @@ public interface Client {
 
     List<CreditAccount> getCreditAccounts();
 
-    double amountDebitAccounts();
+    double sumOfDebitAccounts();
 
-    double amountOfDebt();
+    double sumOfDebt();
 
-    List<Account> getPlusAccounts();
+    List<Account> getAccountsWithNonNegativeBalance();
 
     void deleteAccount(long uniq);
 
@@ -25,8 +26,7 @@ public interface Client {
 
     void addDebitAccount(DebitAccount debitAccount);
 
+    void subtractBalance(long uniq, double red);
 
-    void reduceBalance(long uniq, double red);
-
-    void increaseBalance(long uniq, double inc);
+    void refillBalance(long uniq, double inc);
 }
