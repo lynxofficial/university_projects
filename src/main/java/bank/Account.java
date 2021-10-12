@@ -1,44 +1,43 @@
 package bank;
 
 class Account {
-    public static final int DEFAULT_BALANCE = 0;
-    public static final int DEFAULT_COMMISSION = 0;
-    public static final Currency DEFAULT_CURRENCY = Currency.RUB;
-    private long uniqueNumber;
-    private double balance = 0;
+    private static final int DEFAULT_BALANCE = 0;
+    private static final int DEFAULT_COMMISSION = 0;
+    protected static final Currency DEFAULT_CURRENCY = Currency.RUB;
+    private long id;
+    private double balance;
     private double commission;
     private Currency currency;
-    private final Currency[] currencies = {Currency.USD, Currency.EUR, Currency.JOY, Currency.TRY, Currency.AED, Currency.RUB};
     private final double[][] currenciesCoefficients = {{1, 1.1, 0.009, 0.1, 0.2, 0.1}, {0.8, 1, 0.007, 0.09, 0.23, 0.01},
             {109.9, 128.9, 1, 12.5, 29.9, 1.5}, {8.7, 10.2, 0.07, 1, 2.3, 0.1},
             {3.6, 4.3, 0.03, 0.4, 1, 0.05}, {72.6, 85.2, 0.6, 8.3, 19.8, 1}};
 
 
-    public Account(long uniqueNumber) {
-        this(uniqueNumber, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
+    public Account(long id) {
+        this(id, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
     }
 
-    public Account(long uniqueNumber, double balance) {
-        this(uniqueNumber, balance, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
+    public Account(long id, double balance) {
+        this(id, balance, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
     }
 
-    public Account(long uniqueNumber, double balance, double commission) {
-        this(uniqueNumber, balance, commission, DEFAULT_CURRENCY);
+    public Account(long id, double balance, double commission) {
+        this(id, balance, commission, DEFAULT_CURRENCY);
     }
 
-    public Account(long uniqueNumber, double balance, double commission, Currency currency) {
-        this.uniqueNumber = uniqueNumber;
+    public Account(long id, double balance, double commission, Currency currency) {
+        this.id = id;
         this.balance = balance;
         this.commission = commission;
         this.currency = currency;
     }
 
-    public long getUniqueNumber() {
-        return uniqueNumber;
+    public long getId() {
+        return id;
     }
 
-    public void setUniqueNumber(long uniqueNumber) {
-        this.uniqueNumber = uniqueNumber;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public double getBalance() {
@@ -49,7 +48,7 @@ class Account {
         this.balance = balance;
     }
 
-    public double decreaseBalance(double decr) {
+    public double subtractBalance(double decr) {
         return balance -= decr;
     }
 
@@ -67,8 +66,8 @@ class Account {
 
     public int getIdCurrency(Currency currency) {
         int id = 0;
-        for (int i = 0; i < currencies.length; i++) {
-            if (currency == currencies[i]) {
+        for (int i = 0; i < Currency.values().length; i++) {
+            if (currency == Currency.values()[i]) {
                 id = i;
                 break;
             }
@@ -84,21 +83,7 @@ class Account {
         balance *= currenciesCoefficients[indexNewCurrency][indexThisCurrency];
     }
 
-    public void printCurrencyCoefficients() {
-        for (int i = 0; i < currencies.length; i++) {
-            System.out.print(String.format("%9s", currencies[i]));
-        }
-        System.out.println();
-        for (int i = 0; i < currencies.length; i++) {
-            System.out.print(currencies[i]);
-            for (int j = 0; j < currencies.length; j++) {
-                System.out.printf(" %7.2f", currenciesCoefficients[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
-    public void reduceCommissionFromBalance() {
+    public void subtractCommissionFromBalance() {
         balance -= commission;
     }
 
@@ -106,7 +91,7 @@ class Account {
         balance -= sum;
     }
 
-    public void replenishmentAccount(double sum) {
+    public void refillAccount(double sum) {
         balance += sum;
     }
 }
