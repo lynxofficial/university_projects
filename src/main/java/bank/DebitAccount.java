@@ -3,20 +3,20 @@ package bank;
 
 public class DebitAccount extends Account {
 
-    public DebitAccount(long uniqueNumber) {
-        super(uniqueNumber);
+    public DebitAccount(long id) {
+        super(id);
     }
 
-    public DebitAccount(long uniqueNumber, double balance) {
-        super(uniqueNumber, balance);
+    public DebitAccount(long id, double balance) {
+        super(id, balance);
     }
 
-    public DebitAccount(long uniqueNumber, double balance, double commission) {
-        super(uniqueNumber, balance, commission);
+    public DebitAccount(long id, double balance, double commission) {
+        super(id, balance, commission);
     }
 
-    public DebitAccount(long uniqueNumber, double balance, double commission, Currency currency) {
-        super(uniqueNumber, balance, commission, currency);
+    public DebitAccount(long id, double balance, double commission, Currency currency) {
+        super(id, balance, commission, currency);
     }
 
     @Override
