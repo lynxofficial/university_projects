@@ -4,7 +4,7 @@ public class AccountNumberGenerator {
     private static long stat = 0;
 
     public static long getNext() {
-        return ++stat;
+        return stat++;
     } // увеличение id счета
 
     public static long getCurrent() {
