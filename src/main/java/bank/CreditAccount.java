@@ -83,7 +83,10 @@ public class CreditAccount extends Account {
         if (object == null || getClass() != object.getClass())
             return false;
         CreditAccount that = (CreditAccount) object;
-        return Double.compare(that.percent, percent) == 0 && Double.compare(that.plusPercents, plusPercents) == 0 && Double.compare(that.plusCommissions, plusCommissions) == 0 && cardLimit == that.cardLimit;
+        return Double.compare(that.percent, percent) == 0
+                && Double.compare(that.plusPercents, plusPercents) == 0
+                && Double.compare(that.plusCommissions, plusCommissions) == 0
+                && cardLimit == that.cardLimit;
     }
 
     @Override
