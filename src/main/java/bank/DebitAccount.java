@@ -4,15 +4,15 @@ package bank;
 public class DebitAccount extends Account {
 
     public DebitAccount(long id) {
-        super(id);
+        this(id, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
     }
 
     public DebitAccount(long id, double balance) {
-        super(id, balance);
+        this(id, balance, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
     }
 
     public DebitAccount(long id, double balance, double commission) {
-        super(id, balance, commission);
+        this(id, balance, commission, DEFAULT_CURRENCY);
     }
 
     public DebitAccount(long id, double balance, double commission, Currency currency) {
