@@ -116,7 +116,7 @@ public class NaturalClient implements Client {
         }
     }
 
-    public List<? extends Account> getDefiniteAccounts(boolean flag) { // true - дебетовые счета, false - кредитные
+    public List<? extends Account> getDefiniteAccounts(String str) {
         List<DebitAccount> debitAccounts = new ArrayList<>();
         List<CreditAccount> creditAccounts = new ArrayList<>();
         for (Account account : accounts) {
@@ -127,13 +127,15 @@ public class NaturalClient implements Client {
                 creditAccounts.add((CreditAccount) account);
             }
         }
-        if (flag) {
+        if (str.equals("debitAccounts"))
             return debitAccounts;
+        else if (str.equals("creditAccounts")) {
+            return creditAccounts;
         }
-        return creditAccounts;
+        return null;
     }
 
-    public double sumOfDebitAccounts() {
+    public double getTotalBalanceOfDebitAccounts() {
         double sum = 0;
         for (Account account : accounts) {
             if (account instanceof DebitAccount) {
@@ -143,11 +145,12 @@ public class NaturalClient implements Client {
         return sum;
     }
 
-    public double sumOfDebt() {
+    public double getTotalBalanceOfDebt() {
         double sum = 0;
         for (Account account : accounts) {
             if (account instanceof CreditAccount) {
-                sum += ((CreditAccount) account).getPlusCommissions() + ((CreditAccount) account).getPlusPercents();
+                sum += ((CreditAccount) account).getAccruedCommissions()
+                        + ((CreditAccount) account).getAccruedPercents();
                 if (account.getBalance() < 0) {
                     sum += account.getBalance();
                 }
