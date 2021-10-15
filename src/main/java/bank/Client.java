@@ -8,12 +8,11 @@ public interface Client {
 
     List<Account> getAccounts();
 
-    List<? extends Account> getDefiniteAccounts(boolean flag);
+    List<? extends Account> getDefiniteAccounts(String str);
 
+    double getTotalBalanceOfDebitAccounts();
 
-    double sumOfDebitAccounts();
-
-    double sumOfDebt();
+    double getTotalBalanceOfDebt();
 
     List<Account> getPlusBalancesAccounts();
 
