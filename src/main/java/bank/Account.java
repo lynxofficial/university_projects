@@ -1,8 +1,8 @@
 package bank;
 
 class Account {
-    private static final int DEFAULT_BALANCE = 0;
-    private static final int DEFAULT_COMMISSION = 0;
+    protected static final double DEFAULT_BALANCE = 0;
+    protected static final double DEFAULT_COMMISSION = 0;
     protected static final Currency DEFAULT_CURRENCY = Currency.RUB;
     private long id;
     private double balance;
@@ -48,8 +48,8 @@ class Account {
         this.balance = balance;
     }
 
-    public double subtractBalance(double decr) {
-        return balance -= decr;
+    public void subtractBalance(double balance) {
+        this.balance -= balance;
     }
 
     public double getCommission() {
@@ -64,7 +64,7 @@ class Account {
         return currency;
     }
 
-    public int getIdCurrency(Currency currency) {
+    public int getCurrencyId(Currency currency) {
         int id = 0;
         for (int i = 0; i < Currency.values().length; i++) {
             if (currency == Currency.values()[i]) {
@@ -76,8 +76,8 @@ class Account {
     }
 
     public void setCurrency(Currency currency) {
-        int indexThisCurrency = getIdCurrency(this.currency);
-        int indexNewCurrency = getIdCurrency(currency);
+        int indexThisCurrency = getCurrencyId(this.currency);
+        int indexNewCurrency = getCurrencyId(currency);
         this.currency = currency;
         commission *= currenciesCoefficients[indexNewCurrency][indexThisCurrency];
         balance *= currenciesCoefficients[indexNewCurrency][indexThisCurrency];
