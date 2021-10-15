@@ -1,7 +1,7 @@
 package bank;
 
 public class AccountNumberGenerator {
-    private static long stat = 0;
+    private static long stat;
 
     public static long getNext() {
         return stat++;
