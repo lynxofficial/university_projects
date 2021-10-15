@@ -4,6 +4,7 @@ class Account {
     protected static final double DEFAULT_BALANCE = 0;
     protected static final double DEFAULT_COMMISSION = 0;
     protected static final Currency DEFAULT_CURRENCY = Currency.RUB;
+
     private long id;
     private double balance;
     private double commission;
@@ -11,7 +12,6 @@ class Account {
     private final double[][] currenciesCoefficients = {{1, 1.1, 0.009, 0.1, 0.2, 0.1}, {0.8, 1, 0.007, 0.09, 0.23, 0.01},
             {109.9, 128.9, 1, 12.5, 29.9, 1.5}, {8.7, 10.2, 0.07, 1, 2.3, 0.1},
             {3.6, 4.3, 0.03, 0.4, 1, 0.05}, {72.6, 85.2, 0.6, 8.3, 19.8, 1}};
-
 
     public Account(long id) {
         this(id, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY);
