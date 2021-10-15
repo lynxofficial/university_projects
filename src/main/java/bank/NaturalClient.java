@@ -45,13 +45,13 @@ public class NaturalClient implements Client {
         this.passport = passport;
     }
 
-    public Account getAccount(long uniq) {
+    public Account getAccount(long id) {
         for (Account account : accounts) {
-            if (account.getId() == uniq) {
+            if (account.getId() == id) {
                 return account;
             }
         }
-        return new Account(uniq);
+        return null;
     }
 
     public List<Account> getAccounts() {
@@ -61,14 +61,12 @@ public class NaturalClient implements Client {
     public long totalBalance() {
         long sum = 0;
         for (Account account : accounts) {
-            if (account.getBalance() > 0) {
-                sum += account.getBalance();
-            }
+            sum += account.getBalance();
         }
         return sum;
     }
 
-    public List<Account> getAccountsWithNonNegativeBalance() {
+    public List<Account> getPlusBalancesAccounts() {
         List<Account> plusAccounts = new ArrayList<>();
         for (Account account : accounts) {
             if (account.getBalance() >= 0) {
@@ -78,9 +76,9 @@ public class NaturalClient implements Client {
         return plusAccounts;
     }
 
-    public void deleteAccount(long uniq) {
+    public void deleteAccount(long id) {
         for (Account account : accounts) {
-            if (account.getId() == uniq) {
+            if (account.getId() == id) {
                 accounts.remove(account);
                 break;
             }
@@ -100,40 +98,37 @@ public class NaturalClient implements Client {
         accounts.add(creditAccount);
     }
 
-    public void subtractBalance(long uniq, double red) {
+    public void subtractBalance(long id, double red) {
         for (Account account : accounts) {
-            if (account.getId() == uniq) {
+            if (account.getId() == id) {
                 account.subtractBalance(red);
                 break;
             }
         }
     }
 
-    public void refillBalance(long uniq, double inc) {
+    public void refillBalance(long id, double inc) {
         for (Account account : accounts) {
-            if (account.getId() == uniq) {
+            if (account.getId() == id) {
                 account.refillAccount(inc);
                 break;
             }
         }
     }
 
-    public List<DebitAccount> getDebitAccounts() {
+    public List<? extends Account> getDefiniteAccounts(boolean flag) { // true - дебетовые счета, false - кредитные
         List<DebitAccount> debitAccounts = new ArrayList<>();
+        List<CreditAccount> creditAccounts = new ArrayList<>();
         for (Account account : accounts) {
             if (account instanceof DebitAccount) {
                 debitAccounts.add((DebitAccount) account);
             }
-        }
-        return debitAccounts;
-    }
-
-    public List<CreditAccount> getCreditAccounts() {
-        List<CreditAccount> creditAccounts = new ArrayList<>();
-        for (Account account : accounts) {
             if (account instanceof CreditAccount) {
                 creditAccounts.add((CreditAccount) account);
             }
+        }
+        if (flag) {
+            return debitAccounts;
         }
         return creditAccounts;
     }
@@ -152,8 +147,7 @@ public class NaturalClient implements Client {
         double sum = 0;
         for (Account account : accounts) {
             if (account instanceof CreditAccount) {
-                sum += ((CreditAccount) account).getPlusCommissions();
-                sum += ((CreditAccount) account).getPlusPercents();
+                sum += ((CreditAccount) account).getPlusCommissions() + ((CreditAccount) account).getPlusPercents();
                 if (account.getBalance() < 0) {
                     sum += account.getBalance();
                 }
@@ -167,7 +161,10 @@ public class NaturalClient implements Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NaturalClient that = (NaturalClient) o;
-        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(passport, that.passport) && Objects.equals(accounts, that.accounts);
+        return Objects.equals(firstName, that.firstName)
+                && Objects.equals(lastName, that.lastName)
+                && Objects.equals(passport, that.passport)
+                && Objects.equals(accounts, that.accounts);
     }
 
     @Override
