@@ -5,6 +5,7 @@ import java.time.Month;
 import java.util.Objects;
 
 public class CreditAccount extends Account {
+    private static final double DEFAULT_PLUS_PERCENT = 0;
     private static final double DEFAULT_PERCENT = 0;
     private static final long DEFAULT_CARD_LIMIT = 0;
     private double percent;
@@ -74,6 +75,8 @@ public class CreditAccount extends Account {
     public void refillAccount(double sum) {
         super.refillAccount(sum);
         subtractBalance(plusCommissions + plusPercents);
+        plusCommissions = DEFAULT_COMMISSION;
+        plusPercents = DEFAULT_PLUS_PERCENT;
     }
 
     @Override
