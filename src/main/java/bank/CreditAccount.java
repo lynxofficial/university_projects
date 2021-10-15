@@ -5,25 +5,27 @@ import java.time.Month;
 import java.util.Objects;
 
 public class CreditAccount extends Account {
+    private static final double DEFAULT_PERCENT = 0;
+    private static final long DEFAULT_CARD_LIMIT = 0;
     private double percent;
     private long cardLimit;
     private double plusPercents;
     private double plusCommissions;
 
     public CreditAccount(long id) {
-        super(id);
+        this(id, DEFAULT_BALANCE, DEFAULT_COMMISSION, DEFAULT_CURRENCY, DEFAULT_PERCENT, DEFAULT_CARD_LIMIT);
     }
 
     public CreditAccount(long id, double balance) {
-        super(id, balance);
+        this(id, balance, DEFAULT_COMMISSION, DEFAULT_CURRENCY, DEFAULT_PERCENT, DEFAULT_CARD_LIMIT);
     }
 
     public CreditAccount(long id, double balance, double commission) {
-        super(id, balance, commission, DEFAULT_CURRENCY);
+        this(id, balance, commission, DEFAULT_CURRENCY, DEFAULT_PERCENT, DEFAULT_CARD_LIMIT);
     }
 
     public CreditAccount(long id, double balance, double commission, Currency currency) {
-        super(id, balance, commission, currency);
+        this(id, balance, commission, currency, DEFAULT_PERCENT, DEFAULT_CARD_LIMIT);
     }
 
     public CreditAccount(long id, double balance, double commission, Currency currency, double percent, long cardLimit) {
@@ -66,13 +68,12 @@ public class CreditAccount extends Account {
     @Override
     public void subtractCommissionFromBalance() {
         plusCommissions += getCommission();
-        setCommission(getCommission() + plusCommissions);
     }
 
     @Override
     public void refillAccount(double sum) {
-        subtractBalance(plusCommissions + plusPercents);
         super.refillAccount(sum);
+        subtractBalance(plusCommissions + plusPercents);
     }
 
     @Override
@@ -92,6 +93,9 @@ public class CreditAccount extends Account {
 
     @Override
     public String toString() {
-        return "percent: " + percent + "\n" + "assessed_percents: " + plusPercents + "\n" + "assessed_commissions: " + plusCommissions + "\n" + "limit: " + cardLimit + "\n";
+        return "percent: " + percent + "\n"
+                + "plusPercents: " + plusPercents + "\n"
+                + "plusCommissions: " + plusCommissions + "\n"
+                + "cardLimit: " + cardLimit + "\n";
     }
 }
