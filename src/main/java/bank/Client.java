@@ -4,21 +4,20 @@ import java.util.List;
 
 public interface Client {
 
-    Account getAccount(long uniq);
+    Account getAccount(long id);
 
     List<Account> getAccounts();
 
-    List<DebitAccount> getDebitAccounts();
+    List<? extends Account> getDefiniteAccounts(boolean flag);
 
-    List<CreditAccount> getCreditAccounts();
 
     double sumOfDebitAccounts();
 
     double sumOfDebt();
 
-    List<Account> getAccountsWithNonNegativeBalance();
+    List<Account> getPlusBalancesAccounts();
 
-    void deleteAccount(long uniq);
+    void deleteAccount(long id);
 
     void addAccount(Account account);
 
@@ -26,7 +25,7 @@ public interface Client {
 
     void addDebitAccount(DebitAccount debitAccount);
 
-    void subtractBalance(long uniq, double red);
+    void subtractBalance(long id, double red);
 
-    void refillBalance(long uniq, double inc);
+    void refillBalance(long id, double inc);
 }
