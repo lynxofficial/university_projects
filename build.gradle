@@ -33,6 +33,7 @@ allprojects {
 //        reportsDir = new File("${buildDir}/checkstyle".toString())
         ignoreFailures = false
     }
+    
 }
 
 build.dependsOn checkstyleMain
