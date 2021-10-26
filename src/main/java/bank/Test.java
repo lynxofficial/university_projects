@@ -37,8 +37,8 @@ public class Test {
         System.out.println(creditAccount4.getPercent());
         creditAccount.setPercent(10);
         System.out.println(creditAccount4.getCardLimit());
-        System.out.println(creditAccount4.getPlusPercents());
-        System.out.println(creditAccount4.getPlusCommissions());
+        System.out.println(creditAccount4.getAccruedPercents());
+        System.out.println(creditAccount4.getAccruedCommissions());
         creditAccount4.increasePercent(2015);
         creditAccount4.subtractCommissionFromBalance();
         creditAccount4.refillAccount(1000);
@@ -58,10 +58,10 @@ public class Test {
         naturalClient.addDebitAccount(debitAccount2);
         naturalClient.subtractBalance(1, 100);
         naturalClient.refillBalance(1, 1000);
-        System.out.println(naturalClient.getDefiniteAccounts(true));
-        System.out.println(naturalClient.getDefiniteAccounts(false));
-        System.out.println(naturalClient.sumOfDebitAccounts());
-        System.out.println(naturalClient.sumOfDebt());
+        System.out.println(naturalClient.getDefiniteAccounts("debitAccount"));
+        System.out.println(naturalClient.getDefiniteAccounts("creditAccount"));
+        System.out.println(naturalClient.getTotalBalanceOfDebitAccounts());
+        System.out.println(naturalClient.getTotalBalanceOfDebt());
         Account account4 = new Account(10, 1, 0, Currency.EUR);
         account4.setCurrency(Currency.RUB);
         System.out.println(account4.getBalance());
