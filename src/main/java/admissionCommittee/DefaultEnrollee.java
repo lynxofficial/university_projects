@@ -113,6 +113,10 @@ public class DefaultEnrollee implements Enrollee {
         return examScores;
     }
 
+    public int getSumOfExamScores() {
+        return examScores.stream().mapToInt(x -> x).sum();
+    }
+
     public void addSelectedEducationalProgram(EducationalProgram educationalProgram) throws LimitExceededException {
         if (eduProgramChoiceConstraint == 0) {
             throw new LimitExceededException(Messages.DEFAULT_LIMIT_EXCEED_MESSAGE);

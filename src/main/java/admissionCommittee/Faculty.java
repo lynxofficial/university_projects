@@ -1,6 +1,7 @@
 package admissionCommittee;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,12 +9,14 @@ public class Faculty extends University {
     private String facultyName;
     private List<String> requiredExams;
     private List<EducationalProgram> educationalPrograms;
+    private int[] minExamScores;
 
     public Faculty(String universityName, String facultyName, List<String> requiredExams) {
         super(universityName);
         this.facultyName = facultyName;
         this.requiredExams = requiredExams;
         this.educationalPrograms = new ArrayList<>();
+        this.minExamScores = new int[3];
     }
 
     public String getFacultyName() {
@@ -30,6 +33,20 @@ public class Faculty extends University {
 
     public List<EducationalProgram> getEducationalPrograms() {
         return educationalPrograms;
+    }
+
+    public int[] getMinExamScores() {
+        return minExamScores;
+    }
+
+    public int getSumOfMinScores() {
+        return Arrays.stream(minExamScores).sum();
+    }
+
+    public void addMinScores(int[] minScores) {
+        for (int i = 0; i < minScores.length; i++) {
+            this.minExamScores[i] = minScores[i];
+        }
     }
 
     public void addEducationalProgram(EducationalProgram educationalProgram) {

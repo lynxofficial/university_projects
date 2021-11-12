@@ -21,14 +21,33 @@ public class DefaultAdmissionCommittee extends University implements AdmissionCo
     }
 
     public void distributeEnrollees(List<DefaultEnrollee> newDefaultEnrollees) {
-        for (DefaultEnrollee defaultEnrollee : newDefaultEnrollees) {
-            for (EducationalProgram educationalProgram : defaultEnrollee.getSelectedEducationalPrograms()) {
-                if (!enrollees.containsKey(educationalProgram.getNameOfEducationalProgram())) {
-                    enrollees.put(educationalProgram.getNameOfEducationalProgram(), new ArrayList<>());
+        for (Faculty faculty : faculties) {
+            for (DefaultEnrollee defaultEnrollee : newDefaultEnrollees) {
+                for (EducationalProgram educationalProgram : defaultEnrollee.getSelectedEducationalPrograms()) {
+                    if (defaultEnrollee.getSumOfExamScores() >= faculty.getSumOfMinScores()
+                            && educationalProgram.getFacultyName().equals(faculty.getFacultyName())
+                            && educationalProgram.getNameOfEducationalProgram()
+                            .equals(getExistingEducationalProgramInFaculty(faculty, defaultEnrollee))) {
+                        if (!enrollees.containsKey(educationalProgram.getNameOfEducationalProgram())) {
+                            enrollees.put(educationalProgram.getNameOfEducationalProgram(), new ArrayList<>());
+                        }
+                        enrollees.get(educationalProgram.getNameOfEducationalProgram()).add(defaultEnrollee);
+                    }
                 }
-                enrollees.get(educationalProgram.getNameOfEducationalProgram()).add(defaultEnrollee);
             }
         }
+    }
+
+    public String getExistingEducationalProgramInFaculty(Faculty faculty, Enrollee enrollee) {
+        for (int i = 0; i < faculty.getEducationalPrograms().size(); i++) {
+            for (int j = 0; j < enrollee.getSelectedEducationalPrograms().size(); j++) {
+                if (enrollee.getSelectedEducationalPrograms().get(j).getNameOfEducationalProgram()
+                        .equals(faculty.getEducationalPrograms().get(i).getNameOfEducationalProgram())) {
+                    return enrollee.getSelectedEducationalPrograms().get(j).getNameOfEducationalProgram();
+                }
+            }
+        }
+        return "";
     }
 
     public void sortEnrolleesByScore() {
