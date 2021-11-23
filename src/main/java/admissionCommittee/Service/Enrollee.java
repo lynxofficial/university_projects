@@ -1,4 +1,7 @@
-package admissionCommittee;
+package admissionCommittee.Service;
+
+import admissionCommittee.EducationalProgram;
+import admissionCommittee.LimitExceededException;
 
 import java.time.LocalDate;
 import java.util.List;

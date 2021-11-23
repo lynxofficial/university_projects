@@ -1,28 +1,13 @@
 package admissionCommittee;
 
-import java.util.List;
 import java.util.Objects;
 
-public class EducationalProgram extends Faculty {
+public class EducationalProgram {
     private static final int DEFAULT_ADMISSION_PLAN = 3;
 
     private String educationalProgramCode;
     private String nameOfEducationalProgram;
     private int admissionPlan;
-
-    public EducationalProgram(String universityName, String facultyName, List<String> requiredExams,
-                              String educationalProgramCode, String nameOfEducationalProgram) {
-        this(universityName, facultyName, requiredExams,
-                educationalProgramCode, nameOfEducationalProgram, DEFAULT_ADMISSION_PLAN);
-    }
-
-    public EducationalProgram(String universityName, String facultyName, List<String> requiredExams,
-                              String educationalProgramCode, String nameOfEducationalProgram, int admissionPlan) {
-        super(universityName, facultyName, requiredExams);
-        this.educationalProgramCode = educationalProgramCode;
-        this.nameOfEducationalProgram = nameOfEducationalProgram;
-        this.admissionPlan = admissionPlan;
-    }
 
     public String getEducationalProgramCode() {
         return educationalProgramCode;

@@ -1,4 +1,7 @@
-package admissionCommittee;
+package admissionCommittee.Service;
+
+import admissionCommittee.DefaultEnrollee;
+import admissionCommittee.Faculty;
 
 import java.util.List;
 import java.util.Map;

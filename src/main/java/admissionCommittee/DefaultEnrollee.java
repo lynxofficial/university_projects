@@ -1,7 +1,8 @@
 package admissionCommittee;
 
+import admissionCommittee.Service.Enrollee;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,21 +22,6 @@ public class DefaultEnrollee implements Enrollee {
     private String[] selectedSubjects;
     private byte eduProgramChoiceConstraint;
 
-    public DefaultEnrollee(long id, String fullName, String gender, String phone, String education, String dateOfBirthday,
-                           String address, String passport, String selectedSubjects) {
-        this.id = id;
-        this.fullName = fullName;
-        this.gender = gender;
-        this.phone = phone;
-        this.education = education;
-        this.dateOfBirthday = LocalDate.parse(dateOfBirthday);
-        this.address = address;
-        this.passport = passport;
-        this.eduProgramChoiceConstraint = DEFAULT_EDU_PROGRAM_CHOICE_CONSTRAINT;
-        this.selectedSubjects = selectedSubjects.split(", ");
-        this.examScores = new ArrayList<>();
-        this.selectedEducationalPrograms = new ArrayList<>();
-    }
 
     public String getFullName() {
         return fullName;

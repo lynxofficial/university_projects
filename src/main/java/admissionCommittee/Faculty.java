@@ -5,19 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Faculty extends University {
+public class Faculty {
     private String facultyName;
     private List<String> requiredExams;
     private List<EducationalProgram> educationalPrograms;
     private int[] minExamScores;
-
-    public Faculty(String universityName, String facultyName, List<String> requiredExams) {
-        super(universityName);
-        this.facultyName = facultyName;
-        this.requiredExams = requiredExams;
-        this.educationalPrograms = new ArrayList<>();
-        this.minExamScores = new int[3];
-    }
 
     public String getFacultyName() {
         return facultyName;

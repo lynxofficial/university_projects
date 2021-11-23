@@ -1,16 +1,13 @@
 package admissionCommittee;
 
+import admissionCommittee.Service.AdmissionCommittee;
+import admissionCommittee.Service.Enrollee;
+
 import java.util.*;
 
-public class DefaultAdmissionCommittee extends University implements AdmissionCommittee {
+public class DefaultAdmissionCommittee implements AdmissionCommittee {
     private List<Faculty> faculties;
     private Map<String, List<DefaultEnrollee>> enrollees;
-
-    public DefaultAdmissionCommittee(String universityName, List<Faculty> faculties) {
-        super(universityName);
-        this.faculties = faculties;
-        this.enrollees = new HashMap<>();
-    }
 
     public List<Faculty> getFaculties() {
         return faculties;
@@ -25,7 +22,7 @@ public class DefaultAdmissionCommittee extends University implements AdmissionCo
             for (DefaultEnrollee defaultEnrollee : newDefaultEnrollees) {
                 for (EducationalProgram educationalProgram : defaultEnrollee.getSelectedEducationalPrograms()) {
                     if (defaultEnrollee.getSumOfExamScores() >= faculty.getSumOfMinScores()
-                            && educationalProgram.getFacultyName().equals(faculty.getFacultyName())
+                            && educationalProgram.equals(faculty.getFacultyName())
                             && educationalProgram.getNameOfEducationalProgram()
                             .equals(getExistingEducationalProgramInFaculty(faculty, defaultEnrollee))) {
                         if (!enrollees.containsKey(educationalProgram.getNameOfEducationalProgram())) {
