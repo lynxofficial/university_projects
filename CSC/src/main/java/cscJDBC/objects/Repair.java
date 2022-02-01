@@ -2,7 +2,7 @@ package cscJDBC.objects;
 
 import java.util.Objects;
 
-public class Repair {
+public class Repair extends Employee {
     private String description;
     private CarServiceCenter center;
     private Employee employee;

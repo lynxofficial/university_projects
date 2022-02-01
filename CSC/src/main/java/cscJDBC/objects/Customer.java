@@ -3,7 +3,7 @@ package cscJDBC.objects;
 import java.util.List;
 import java.util.Objects;
 
-public class Customer {
+public class Customer extends CarServiceCenter {
     private String name;
     private String email;
     private List<CarServiceCenter> centers;

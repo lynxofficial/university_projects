@@ -67,6 +67,7 @@ public class PostgresEmployee extends AbstractDao {
             employee.setCenter((CarServiceCenter) resultSet.getObject(6));
             list.add(employee);
         }
+        preparedStatement.close();
         return list;
     }
 }

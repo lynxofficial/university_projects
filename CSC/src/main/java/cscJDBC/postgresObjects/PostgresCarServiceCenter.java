@@ -67,6 +67,7 @@ public class PostgresCarServiceCenter extends AbstractDao {
             carServiceCenter.setRepairs((List<Repair>) resultSet.getObject(6));
             list.add(carServiceCenter);
         }
+        preparedStatement.close();
         return list;
     }
 }

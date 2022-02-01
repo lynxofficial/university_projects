@@ -1,6 +1,6 @@
 package cscJDBC.objects;
 
-public class Individual {
+public class Individual extends Customer{
     private String passportNo;
 
     public String getPassportNo() {

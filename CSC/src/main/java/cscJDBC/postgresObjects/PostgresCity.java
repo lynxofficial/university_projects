@@ -55,6 +55,7 @@ public class PostgresCity extends AbstractDao {
             city.setCode(resultSet.getString(2));
             list.add(city);
         }
+        preparedStatement.close();
         return list;
     }
 }

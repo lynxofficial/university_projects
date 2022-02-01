@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
-public class Employee {
+public class Employee extends CarServiceCenter {
     private CarServiceCenter center;
     private String lastName;
     private String email;

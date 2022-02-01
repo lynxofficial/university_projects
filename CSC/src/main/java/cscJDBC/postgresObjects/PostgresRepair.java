@@ -59,6 +59,7 @@ public class PostgresRepair extends AbstractDao {
             repair.setEmployee((Employee) resultSet.getObject(3));
             list.add(repair);
         }
+        preparedStatement.close();
         return list;
     }
 }

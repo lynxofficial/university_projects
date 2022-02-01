@@ -1,6 +1,6 @@
 package cscJDBC.objects;
 
-public class Company {
+public class Company extends Customer {
     private String inn;
 
     public String getInn() {

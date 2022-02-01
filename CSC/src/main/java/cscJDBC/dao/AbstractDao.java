@@ -1,16 +1,13 @@
 package cscJDBC.dao;
 
+import cscJDBC.configuration.ConfigurationInfo;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class AbstractDao<T> {
-    protected final Connection DEFAULT_CONNECTION = DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5432/css_database",
-            "postgres",
-            "1234");
-
+public abstract class AbstractDao<T> extends ConfigurationInfo {
     protected AbstractDao() throws SQLException {
     }
 

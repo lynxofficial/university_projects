@@ -68,6 +68,7 @@ public class PostgresCustomer extends AbstractDao {
             customer.setInn(resultSet.getString(6));
             list.add(customer);
         }
+        preparedStatement.close();
         return list;
     }
 }
