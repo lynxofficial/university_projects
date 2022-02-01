@@ -1,10 +1,5 @@
 package admissionCommittee;
 
-import admissionCommittee.objects.Faculty;
-import admissionCommittee.postgreObjects.PostgreFaculty;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Test {
