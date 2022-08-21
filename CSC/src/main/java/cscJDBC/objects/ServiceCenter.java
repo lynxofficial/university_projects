@@ -3,7 +3,7 @@ package cscJDBC.objects;
 import java.util.List;
 import java.util.Objects;
 
-public class CarServiceCenter extends City {
+public class ServiceCenter extends City {
     private List<Employee> employees;
     private String title;
     private City city;
@@ -74,7 +74,7 @@ public class CarServiceCenter extends City {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        CarServiceCenter that = (CarServiceCenter) o;
+        ServiceCenter that = (ServiceCenter) o;
         return Objects.equals(employees, that.employees)
                 && Objects.equals(title, that.title)
                 && Objects.equals(city, that.city)

@@ -4,19 +4,19 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 
-public class Employee extends CarServiceCenter {
-    private CarServiceCenter center;
+public class Employee extends ServiceCenter {
+    private ServiceCenter center;
     private String lastName;
     private String email;
     private BigDecimal salary;
     private String firstName;
     private Date birthDate;
 
-    public CarServiceCenter getCenter() {
+    public ServiceCenter getCenter() {
         return center;
     }
 
-    public void setCenter(CarServiceCenter center) {
+    public void setCenter(ServiceCenter center) {
         this.center = center;
     }
 

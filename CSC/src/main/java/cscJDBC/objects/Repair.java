@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Repair extends Employee {
     private String description;
-    private CarServiceCenter center;
+    private ServiceCenter center;
     private Employee employee;
 
     public String getDescription() {
@@ -15,11 +15,11 @@ public class Repair extends Employee {
         this.description = description;
     }
 
-    public CarServiceCenter getCenter() {
+    public ServiceCenter getCenter() {
         return center;
     }
 
-    public void setCenter(CarServiceCenter center) {
+    public void setCenter(ServiceCenter center) {
         this.center = center;
     }
 

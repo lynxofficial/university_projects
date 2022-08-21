@@ -3,10 +3,10 @@ package cscJDBC.objects;
 import java.util.List;
 import java.util.Objects;
 
-public class Customer extends CarServiceCenter {
+public class Customer extends ServiceCenter {
     private String name;
     private String email;
-    private List<CarServiceCenter> centers;
+    private List<ServiceCenter> centers;
     private String phone;
     private String passportNo;
     private String inn;
@@ -27,11 +27,11 @@ public class Customer extends CarServiceCenter {
         this.email = email;
     }
 
-    public List<CarServiceCenter> getCenters() {
+    public List<ServiceCenter> getCenters() {
         return centers;
     }
 
-    public void setCenters(List<CarServiceCenter> centers) {
+    public void setCenters(List<ServiceCenter> centers) {
         this.centers = centers;
     }
 

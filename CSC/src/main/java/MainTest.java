@@ -1,12 +1,10 @@
 import cscJDBC.objects.City;
-import cscJDBC.postgresObjects.PostgresCarServiceCenter;
-import cscJDBC.postgresObjects.PostgresCity;
+import cscJDBC.postgresObjects.DaoCity;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MainTest {
@@ -32,16 +30,16 @@ public class MainTest {
         City city = new City();
         city.setCode("6");
         city.setTitle("TestCity");
-        PostgresCity postgresCity = new PostgresCity();
-        postgresCity.insert(city);
+        DaoCity daoCity = new DaoCity();
+        daoCity.insert(city);
         city.setCode("7");
-        PostgresCity postgresCity1 = new PostgresCity();
-        postgresCity1.insert(city);
-        Assert.assertNotEquals(postgresCity, postgresCity1);
+        DaoCity daoCity1 = new DaoCity();
+        daoCity1.insert(city);
+        Assert.assertNotEquals(daoCity, daoCity1);
     }
 
     @Test
-    public static void testDeleteData() throws SQLException{
+    public static void testDeleteData() throws SQLException {
         Connection connection = DriverManager.getConnection(
                 "jdbc:postgresql://localhost:5432/css_database",
                 "postgres",
@@ -49,12 +47,12 @@ public class MainTest {
         City city = new City();
         city.setCode("7");
         city.setTitle("TestCity");
-        PostgresCity postgresCity = new PostgresCity();
-        postgresCity.delete(city);
+        DaoCity daoCity = new DaoCity();
+        daoCity.delete(city);
         city.setCode("6");
-        PostgresCity postgresCity1 = new PostgresCity();
-        postgresCity1.delete(city);
-        Assert.assertNotEquals(postgresCity, postgresCity1);
+        DaoCity daoCity1 = new DaoCity();
+        daoCity1.delete(city);
+        Assert.assertNotEquals(daoCity, daoCity1);
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {

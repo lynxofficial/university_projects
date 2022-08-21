@@ -5,11 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConfigurationInfo {
-    protected final Connection DEFAULT_CONNECTION = DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5432/css_database",
-            "postgres",
-            "1234");
+    public static final Connection DEFAULT_CONNECTION;
 
-    public ConfigurationInfo() throws SQLException {
+    static {
+        try {
+            DEFAULT_CONNECTION = DriverManager.getConnection(
+                    "jdbc:postgresql://localhost:5432/css_database",
+                    "postgres",
+                    "1234");
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

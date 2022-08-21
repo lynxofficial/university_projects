@@ -1,7 +1,8 @@
 package cscJDBC.postgresObjects;
 
+import cscJDBC.configuration.ConfigurationInfo;
 import cscJDBC.dao.AbstractDao;
-import cscJDBC.objects.CarServiceCenter;
+import cscJDBC.objects.ServiceCenter;
 import cscJDBC.objects.Employee;
 import cscJDBC.objects.Repair;
 
@@ -11,14 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostgresRepair extends AbstractDao {
-    public PostgresRepair() throws SQLException {
-    }
+public class DaoRepair implements AbstractDao {
 
     @Override
     public void insert(Object o) throws SQLException {
         Repair repair = (Repair) o;
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "insert into css.\"Repair\" values (?, ?, ?)");
         preparedStatement.setString(1, repair.getDescription());
         preparedStatement.setObject(2, repair.getCenter());
@@ -30,7 +29,7 @@ public class PostgresRepair extends AbstractDao {
     @Override
     public void delete(Object o) throws SQLException {
         Repair repair = (Repair) o;
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "delete from css.\"Repair\" where description=?");
         preparedStatement.setString(1, repair.getDescription());
         preparedStatement.executeUpdate();
@@ -39,7 +38,7 @@ public class PostgresRepair extends AbstractDao {
 
     @Override
     public void update(Object o, String desc, String key) throws SQLException {
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "update css.\"Repair\" set description=? where center=?");
         preparedStatement.setString(1, desc);
         preparedStatement.setString(2, key);
@@ -50,12 +49,13 @@ public class PostgresRepair extends AbstractDao {
     @Override
     public List getAll() throws SQLException {
         List<Repair> list = new ArrayList<>();
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement("select * from css.\"Repair\"");
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
+                "select * from css.\"Repair\"");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Repair repair = new Repair();
             repair.setDescription(resultSet.getString(1));
-            repair.setCenter((CarServiceCenter) resultSet.getObject(2));
+            repair.setCenter((ServiceCenter) resultSet.getObject(2));
             repair.setEmployee((Employee) resultSet.getObject(3));
             list.add(repair);
         }

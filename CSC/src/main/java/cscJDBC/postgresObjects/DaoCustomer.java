@@ -1,5 +1,6 @@
 package cscJDBC.postgresObjects;
 
+import cscJDBC.configuration.ConfigurationInfo;
 import cscJDBC.dao.AbstractDao;
 import cscJDBC.objects.*;
 
@@ -9,14 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostgresCustomer extends AbstractDao {
-    public PostgresCustomer() throws SQLException {
-    }
+public class DaoCustomer implements AbstractDao {
 
     @Override
     public void insert(Object o) throws SQLException {
         Customer customer = (Customer) o;
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "insert into css.\"CarServiceCenter\" values (?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, customer.getName());
         preparedStatement.setString(2, customer.getPhone());
@@ -31,7 +30,7 @@ public class PostgresCustomer extends AbstractDao {
     @Override
     public void delete(Object o) throws SQLException {
         Customer customer = (Customer) o;
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "delete from css.\"Customer\" where name=?");
         if (customer.getPassportNo() != null) {
             preparedStatement.setString(1, customer.getPassportNo());
@@ -44,7 +43,7 @@ public class PostgresCustomer extends AbstractDao {
 
     @Override
     public void update(Object o, String phone, String name) throws SQLException {
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "update css.\"Customer\" set phone=? where name=?");
         preparedStatement.setString(1, phone);
         preparedStatement.setString(2, name);
@@ -55,7 +54,7 @@ public class PostgresCustomer extends AbstractDao {
     @Override
     public List getAll() throws SQLException {
         List<Customer> list = new ArrayList<>();
-        PreparedStatement preparedStatement = DEFAULT_CONNECTION.prepareStatement(
+        PreparedStatement preparedStatement = ConfigurationInfo.DEFAULT_CONNECTION.prepareStatement(
                 "select * from css.\"Customer\"");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -63,7 +62,7 @@ public class PostgresCustomer extends AbstractDao {
             customer.setName(resultSet.getString(1));
             customer.setPhone(resultSet.getString(2));
             customer.setEmail(resultSet.getString(3));
-            customer.setCenters((List<CarServiceCenter>) resultSet.getObject(4));
+            customer.setCenters((List<ServiceCenter>) resultSet.getObject(4));
             customer.setPassportNo(resultSet.getString(5));
             customer.setInn(resultSet.getString(6));
             list.add(customer);
