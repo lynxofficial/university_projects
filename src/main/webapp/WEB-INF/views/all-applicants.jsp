@@ -72,15 +72,5 @@
            onclick="window.location.href='addNewApplicant'"/>
 </div>
 <br>
-<%--<div style="text-align: center;">--%>
-<%--    <input type="button" class="w3-btn w3-green w3-round-large" value="To buyers"--%>
-<%--           onclick="window.location.href='buyers'"/>--%>
-<%--    <input type="button" class="w3-btn w3-green w3-round-large" value="To employees"--%>
-<%--           onclick="window.location.href='employees'"/>--%>
-<%--    <input type="button" class="w3-btn w3-green w3-round-large" value="To realty"--%>
-<%--           onclick="window.location.href='realty'"/>--%>
-<%--    <input type="button" class="w3-btn w3-green w3-round-large" value="To sellers"--%>
-<%--           onclick="window.location.href='sellers'"/>--%>
-<%--</div>--%>
 </body>
 </html>
