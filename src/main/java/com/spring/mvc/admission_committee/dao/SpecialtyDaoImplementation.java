@@ -1,5 +1,6 @@
 package com.spring.mvc.admission_committee.dao;
 
+import com.spring.mvc.admission_committee.entity.Applicant;
 import com.spring.mvc.admission_committee.entity.Specialty;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -39,5 +40,14 @@ public class SpecialtyDaoImplementation implements SpecialtyDao {
         session.createQuery("delete from Specialty where specialtyId=:specialtyId")
                 .setParameter("specialtyId", specialtyId)
                 .executeUpdate();
+    }
+
+    @Override
+    public void addSpecialtiesToApplicant(List<Specialty> specialties, Applicant applicant) {
+        Session session = entityManager.unwrap(Session.class);
+        for (Specialty specialty : specialties) {
+            applicant.addSpecialty(specialty);
+        }
+        session.saveOrUpdate(applicant);
     }
 }

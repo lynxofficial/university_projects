@@ -44,25 +44,25 @@
         </th>
     </tr>
     <jsp:useBean id="applicants" scope="request" type="java.util.List"/>
-    <c:forEach var="specialty" items="${applicants}">
+    <c:forEach var="applicant" items="${applicants}">
         <c:url var="updateButton" value="/mvc/updateApplicant">
-            <c:param name="applicantId" value="${specialty.applicantId}"/>
+            <c:param name="applicantId" value="${applicant.applicantId}"/>
         </c:url>
         <c:url var="deleteButton" value="/mvc/deleteApplicant">
-            <c:param name="applicantId" value="${specialty.applicantId}"/>
+            <c:param name="applicantId" value="${applicant.applicantId}"/>
         </c:url>
-        <c:url var="addDirectionButton" value="/mvc/addApplicantDirection">
-            <c:param name="applicantId" value="${specialty.applicantId}"/>
+        <c:url var="addSpecialtyToApplicant" value="/mvc/addSpecialtyToApplicant">
+            <c:param name="applicantId" value="${applicant.applicantId}"/>
         </c:url>
         <tr>
-            <td>${specialty.lastName}</td>
-            <td>${specialty.firstName}</td>
-            <td>${specialty.middleName}</td>
-            <td>${specialty.phone}</td>
-            <td>${specialty.email}</td>
+            <td>${applicant.lastName}</td>
+            <td>${applicant.firstName}</td>
+            <td>${applicant.middleName}</td>
+            <td>${applicant.phone}</td>
+            <td>${applicant.email}</td>
             <td>
-                <input type="button" class="w3-btn w3-green w3-round-large w3-margin" value="Add direction"
-                       onclick="window.location.href='${addDirectionButton}'"/>
+                <input type="button" class="w3-btn w3-green w3-round-large w3-margin" value="Add specialties"
+                       onclick="window.location.href='${addSpecialtyToApplicant}'"/>
                 <input type="button" class="w3-btn w3-green w3-round-large w3-margin" value="Update"
                        onclick="window.location.href='${updateButton}'"/>
                 <input type="button" class="w3-btn w3-green w3-round-large w3-margin" value="Delete"

@@ -1,6 +1,8 @@
 package com.spring.mvc.admission_committee.controller;
 
+import com.spring.mvc.admission_committee.entity.Applicant;
 import com.spring.mvc.admission_committee.entity.Specialty;
+import com.spring.mvc.admission_committee.service.ApplicantService;
 import com.spring.mvc.admission_committee.service.SpecialtyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/mvc")
 public class SpecialtyMvcController {
     private final SpecialtyService specialtyService;
+    private final ApplicantService applicantService;
 
-    public SpecialtyMvcController(SpecialtyService specialtyService) {
+    public SpecialtyMvcController(SpecialtyService specialtyService, ApplicantService applicantService) {
         this.specialtyService = specialtyService;
+        this.applicantService = applicantService;
     }
 
     @RequestMapping("/specialties")
@@ -45,5 +49,21 @@ public class SpecialtyMvcController {
     public String deleteSpecialty(@RequestParam Integer specialtyId) {
         specialtyService.deleteSpecialty(specialtyId);
         return "redirect:/mvc/specialties";
+    }
+
+    @RequestMapping("/addSpecialtyToApplicant")
+    public String addSpecialtyToApplicant(@RequestParam("applicantId") Integer applicantId, Model model) {
+        model.addAttribute("specialties", specialtyService.getAllSpecialties());
+        model.addAttribute("applicant", applicantService.getApplicant(applicantId));
+        return "adding-specialties-to-applicant";
+    }
+
+    @RequestMapping("/addSelectedSpecialtyToApplicant")
+    public String addSelectedSpecialtyToApplicant(@RequestParam("specialtyId") Integer specialtyId,
+                                                  @RequestParam("applicantId") Integer applicantId) {
+        Applicant applicant = applicantService.getApplicant(applicantId);
+        applicant.addSpecialty(specialtyService.getSpecialty(specialtyId));
+        applicantService.saveApplicant(applicant);
+        return "redirect:/mvc/applicants";
     }
 }

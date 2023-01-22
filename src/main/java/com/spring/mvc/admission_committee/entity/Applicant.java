@@ -1,6 +1,8 @@
 package com.spring.mvc.admission_committee.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +22,10 @@ public class Applicant {
     private String phone;
     @Column(name = "email")
     private String email;
+    @ManyToMany
+    @JoinTable(name = "applicant_specialty",
+            joinColumns = @JoinColumn(name = "applicant_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+    private List<Specialty> specialties;
 
     public Applicant() {
     }
@@ -78,6 +84,13 @@ public class Applicant {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void addSpecialty(Specialty specialty) {
+        if (specialties == null) {
+            specialties = new ArrayList<>();
+        }
+        specialties.add(specialty);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.spring.mvc.admission_committee.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,10 @@ public class Specialty {
     private String specialtyName;
     @Column(name = "quota")
     private Integer quota;
+    @ManyToMany
+    @JoinTable(name = "applicant_specialty",
+            joinColumns = @JoinColumn(name = "specialty_id"), inverseJoinColumns = @JoinColumn(name = "applicant_id"))
+    private List<Applicant> applicants;
 
     public Specialty() {
     }

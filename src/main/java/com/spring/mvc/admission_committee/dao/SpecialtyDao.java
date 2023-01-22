@@ -1,5 +1,6 @@
 package com.spring.mvc.admission_committee.dao;
 
+import com.spring.mvc.admission_committee.entity.Applicant;
 import com.spring.mvc.admission_committee.entity.Specialty;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface SpecialtyDao {
     Specialty getSpecialty(Integer specialtyId);
 
     void deleteSpecialty(Integer specialtyId);
+
+    void addSpecialtiesToApplicant(List<Specialty> specialties, Applicant applicant);
 }

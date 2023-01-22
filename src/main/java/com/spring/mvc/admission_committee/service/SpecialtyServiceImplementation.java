@@ -1,6 +1,7 @@
 package com.spring.mvc.admission_committee.service;
 
 import com.spring.mvc.admission_committee.dao.SpecialtyDao;
+import com.spring.mvc.admission_committee.entity.Applicant;
 import com.spring.mvc.admission_committee.entity.Specialty;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,11 @@ public class SpecialtyServiceImplementation implements SpecialtyService {
     @Transactional
     public void deleteSpecialty(Integer specialtyId) {
         specialtyDao.deleteSpecialty(specialtyId);
+    }
+
+    @Override
+    @Transactional
+    public void addSpecialtiesToApplicant(List<Specialty> specialties, Applicant applicant) {
+        specialtyDao.addSpecialtiesToApplicant(specialties, applicant);
     }
 }
