@@ -40,6 +40,9 @@
             <div class="w3-container w3-green">Email</div>
         </th>
         <th>
+            <div class="w3-container w3-green">Points</div>
+        </th>
+        <th>
             <div class="w3-container w3-green">Operations</div>
         </th>
     </tr>
@@ -60,6 +63,7 @@
             <td>${applicant.middleName}</td>
             <td>${applicant.phone}</td>
             <td>${applicant.email}</td>
+            <td>${applicant.points}</td>
             <td>
                 <input type="button" class="w3-btn w3-green w3-round-large w3-margin" value="Add specialties"
                        onclick="window.location.href='${addSpecialtyToApplicant}'"/>
@@ -73,13 +77,18 @@
 </table>
 <br>
 <div style="text-align: center;">
-    <input type="button" class="w3-btn w3-green w3-round-large" value="Add"
+    <input type="button" class="w3-btn w3-green w3-round-large" value="Add applicant"
            onclick="window.location.href='addNewApplicant'"/>
 </div>
 <br>
 <div style="text-align: center;">
     <input type="button" class="w3-btn w3-green w3-round-large" value="To specialties"
            onclick="window.location.href='specialties'"/>
+</div>
+<br>
+<div style="text-align: center;">
+    <input type="button" class="w3-btn w3-green w3-round-large" value="Create a list of applicants"
+           onclick="window.location.href='createListOfApplicants'"/>
 </div>
 </body>
 </html>

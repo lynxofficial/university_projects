@@ -13,4 +13,6 @@ public interface ApplicantService {
     Applicant getApplicant(Integer applicantId);
 
     void deleteApplicant(Integer applicantId);
+
+    List<Applicant> createListOfApplicants();
 }

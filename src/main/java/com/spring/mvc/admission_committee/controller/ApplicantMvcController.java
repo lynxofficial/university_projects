@@ -46,4 +46,10 @@ public class ApplicantMvcController {
         applicantService.deleteApplicant(applicantId);
         return "redirect:/mvc/applicants";
     }
+
+    @RequestMapping("/createListOfApplicants")
+    public String createListOfApplicants(Model model) {
+        model.addAttribute("applicants", applicantService.createListOfApplicants());
+        return "list-of-applicants";
+    }
 }

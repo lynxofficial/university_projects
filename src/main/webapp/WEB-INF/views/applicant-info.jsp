@@ -34,6 +34,9 @@
     <br><br>
     Email
     <form:input path="email"/>
+    <br><br>
+    Points
+    <form:input path="points"/>
     <br>
     <input type="submit" class="w3-submit w3-green w3-round-large w3-margin" value="OK"/>
 </form:form>

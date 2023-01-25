@@ -17,7 +17,8 @@ public class ApplicantDaoImplementation implements ApplicantDao {
     @Override
     public List<Applicant> getAllApplicants() {
         Session session = entityManager.unwrap(Session.class);
-        Query<Applicant> applicantQuery = session.createQuery("from Applicant", Applicant.class);
+        Query<Applicant> applicantQuery = session.createQuery("from Applicant order by points desc",
+                Applicant.class);
         return applicantQuery.getResultList();
     }
 
@@ -39,5 +40,14 @@ public class ApplicantDaoImplementation implements ApplicantDao {
         session.createQuery("delete from Applicant where applicantId=:applicantId")
                 .setParameter("applicantId", applicantId)
                 .executeUpdate();
+    }
+
+    @Override
+    public List<Applicant> createListOfApplicants() {
+        Session session = entityManager.unwrap(Session.class);
+        Long sumOfQuota = (Long) session.createQuery("select sum(quota) from Specialty").getSingleResult();
+        return session.createQuery("from Applicant order by points desc", Applicant.class)
+                .setMaxResults(Math.toIntExact(sumOfQuota))
+                .getResultList();
     }
 }

@@ -38,4 +38,10 @@ public class ApplicantServiceImplementation implements ApplicantService {
     public void deleteApplicant(Integer applicantId) {
         applicantDao.deleteApplicant(applicantId);
     }
+
+    @Override
+    @Transactional
+    public List<Applicant> createListOfApplicants() {
+        return applicantDao.createListOfApplicants();
+    }
 }

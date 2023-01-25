@@ -60,7 +60,7 @@
 </table>
 <br>
 <div style="text-align: center;">
-    <input type="button" class="w3-btn w3-green w3-round-large" value="Add"
+    <input type="button" class="w3-btn w3-green w3-round-large" value="Add specialty"
            onclick="window.location.href='addNewSpecialty'"/>
 </div>
 <br>

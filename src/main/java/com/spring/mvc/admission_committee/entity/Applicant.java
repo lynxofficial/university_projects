@@ -22,6 +22,8 @@ public class Applicant {
     private String phone;
     @Column(name = "email")
     private String email;
+    @Column(name = "points")
+    private Integer points;
     @ManyToMany
     @JoinTable(name = "applicant_specialty",
             joinColumns = @JoinColumn(name = "applicant_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
@@ -30,12 +32,13 @@ public class Applicant {
     public Applicant() {
     }
 
-    public Applicant(String lastName, String firstName, String middleName, String phone, String email) {
+    public Applicant(String lastName, String firstName, String middleName, String phone, String email, Integer points) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
         this.phone = phone;
         this.email = email;
+        this.points = points;
     }
 
     public Integer getApplicantId() {
@@ -86,6 +89,14 @@ public class Applicant {
         this.email = email;
     }
 
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
     public void addSpecialty(Specialty specialty) {
         if (specialties == null) {
             specialties = new ArrayList<>();
@@ -107,12 +118,13 @@ public class Applicant {
                 && Objects.equals(firstName, applicant.firstName)
                 && Objects.equals(middleName, applicant.middleName)
                 && Objects.equals(phone, applicant.phone)
-                && Objects.equals(email, applicant.email);
+                && Objects.equals(email, applicant.email)
+                && Objects.equals(points, applicant.points);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicantId, lastName, firstName, middleName, phone, email);
+        return Objects.hash(applicantId, lastName, firstName, middleName, phone, email, points);
     }
 
     @Override
@@ -124,6 +136,7 @@ public class Applicant {
                 ", middleName='" + middleName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
+                ", points=" + points +
                 '}';
     }
 }

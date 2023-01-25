@@ -13,4 +13,6 @@ public interface ApplicantDao {
     Applicant getApplicant(Integer applicantId);
 
     void deleteApplicant(Integer applicantId);
+
+    List<Applicant> createListOfApplicants();
 }
