@@ -64,7 +64,7 @@ public class Test {
         System.out.println(naturalClient.getTotalBalanceOfDebt());
         Account account4 = new Account(10, 1, 0, Currency.EUR);
         account4.setCurrency(Currency.RUB);
-        System.out.println(account4.getBalance());
+        System.out.println(account4.getBalance()); //
         double sum = 100;
         try {
             creditAccount4.writeOffSum(sum);
